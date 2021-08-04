@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace ASCIIGraphics
 {
     public class BitmapToAsciiConverter
     {
+        //Наборы символов для имитации различной яркости пикселей
         private readonly char[] _asciiTable = { '.', ',', ':', '+', '*', '?', '%', '$', '#', '@' };
         private readonly char[] _asciiTableNegative = { '@', '#', '$', '%', '?', '*', '+', ':', ',', '.' };
 
@@ -37,8 +33,8 @@ namespace ASCIIGraphics
                 result[y] = new char[_bitmap.Width];
                 for (int x = 0; x < _bitmap.Width; x++)
                 {
-                    int mapIndex = (int)Map(_bitmap.GetPixel(x, y).R, 0, 255, 0, 9);
-                    result[y][x] = tableAscii[mapIndex];
+                    int mapIndex = (int)Map(_bitmap.GetPixel(x, y).R, 0, 255, 0, 9); //Преобразуем диапозон значений (0;255) в (0;9)
+                    result[y][x] = tableAscii[mapIndex]; //итоговый массив ASCII символов для вывода в консоль
                 }
             }
             return result;
